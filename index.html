@@ -5,63 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificando modo anônimo...</title>
     <script>
-        async function detectIncognito() {
+        async function isIncognito() {
             return new Promise((resolve) => {
-                const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
-                if (!fs) {
-                    resolve(false);
-                    return;
+                const on = () => resolve(true);
+                const off = () => resolve(false);
+
+                // Teste para navegadores baseados em Chromium (Chrome, Edge, Brave, Opera)
+                if (window.RequestFileSystem || window.webkitRequestFileSystem) {
+                    window.webkitRequestFileSystem(window.TEMPORARY, 100, off, on);
                 }
-                fs(window.TEMPORARY, 100, () => resolve(false), () => resolve(true));
+                // Teste para Safari (iOS/macOS)
+                else if (navigator.userAgent.includes("Safari") && !navigator.userAgent.includes("Chrome")) {
+                    try {
+                        localStorage.setItem("test", "1");
+                        localStorage.removeItem("test");
+                        off();
+                    } catch (e) {
+                        on();
+                    }
+                }
+                // Teste para Firefox
+                else {
+                    const db = indexedDB.open("test");
+                    db.onerror = on;
+                    db.onsuccess = off;
+                }
             });
         }
 
-        async function checkIncognitoMode() {
-            let isIncognito = false;
-
-            // Teste para navegadores baseados em Chromium (Chrome, Edge, Opera, Brave)
-            if (navigator.userAgent.includes("Chrome")) {
-                try {
-                    const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
-                    if (!fs) {
-                        isIncognito = false;
-                    } else {
-                        fs(window.TEMPORARY, 100, () => isIncognito = false, () => isIncognito = true);
-                    }
-                } catch (e) {
-                    isIncognito = true;
-                }
-            }
-
-            // Teste para Firefox
-            try {
-                const db = indexedDB.open("test");
-                db.onerror = function () {
-                    isIncognito = true;
-                };
-            } catch (e) {
-                isIncognito = true;
-            }
-
-            // Teste para Safari (iPhone/iPad)
-            if (/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)) {
-                try {
-                    localStorage.setItem("test", "1");
-                    localStorage.removeItem("test");
-                } catch (e) {
-                    isIncognito = true;
-                }
-            }
-
-            // Se estiver no modo anônimo, redireciona
-            if (isIncognito) {
+        async function checkMode() {
+            const incognito = await isIncognito();
+            if (incognito) {
                 window.location.href = "https://drive.google.com/drive/folders/1Iv2FtBdHr8lGInLF_9c8Frk3H20a66oc";
             } else {
                 document.getElementById("tutorial").style.display = "block";
             }
         }
 
-        window.onload = checkIncognitoMode;
+        window.onload = checkMode;
     </script>
     <style>
         #tutorial {
