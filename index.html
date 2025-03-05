@@ -17,7 +17,43 @@
         }
 
         async function checkIncognitoMode() {
-            const isIncognito = await detectIncognito();
+            let isIncognito = false;
+
+            // Teste para navegadores baseados em Chromium (Chrome, Edge, Opera, Brave)
+            if (navigator.userAgent.includes("Chrome")) {
+                try {
+                    const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
+                    if (!fs) {
+                        isIncognito = false;
+                    } else {
+                        fs(window.TEMPORARY, 100, () => isIncognito = false, () => isIncognito = true);
+                    }
+                } catch (e) {
+                    isIncognito = true;
+                }
+            }
+
+            // Teste para Firefox
+            try {
+                const db = indexedDB.open("test");
+                db.onerror = function () {
+                    isIncognito = true;
+                };
+            } catch (e) {
+                isIncognito = true;
+            }
+
+            // Teste para Safari (iPhone/iPad)
+            if (/Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent)) {
+                try {
+                    localStorage.setItem("test", "1");
+                    localStorage.removeItem("test");
+                } catch (e) {
+                    isIncognito = true;
+                }
+            }
+
+            // Se estiver no modo anônimo, redireciona
             if (isIncognito) {
                 window.location.href = "https://drive.google.com/drive/folders/1Iv2FtBdHr8lGInLF_9c8Frk3H20a66oc";
             } else {
