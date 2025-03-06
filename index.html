@@ -1,66 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verificando modo anônimo...</title>
-    <script>
-        async function isIncognito() {
-            return new Promise((resolve) => {
-                const on = () => resolve(true);
-                const off = () => resolve(false);
-
-                // Teste para Chrome, Edge e Brave
-                if (window.RequestFileSystem || window.webkitRequestFileSystem) {
-                    window.webkitRequestFileSystem(window.TEMPORARY, 100, off, on);
-                    return;
-                }
-
-                // Teste para Safari (iPhone/iPad/macOS)
-                try {
-                    localStorage.setItem("test", "1");
-                    localStorage.removeItem("test");
-                    off();
-                } catch (e) {
-                    on();
-                    return;
-                }
-
-                // Teste para Firefox
-                const db = indexedDB.open("test");
-                db.onerror = on;
-                db.onsuccess = off;
-            });
-        }
-
-        async function checkMode() {
-            const incognito = await isIncognito();
-            if (incognito) {
-                window.location.href = "https://drive.google.com/drive/folders/1Iv2FtBdHr8lGInLF_9c8Frk3H20a66oc";
-            } else {
-                document.getElementById("tutorial").style.display = "block";
-            }
-        }
-
-        window.onload = checkMode;
-    </script>
-    <style>
-        #tutorial {
-            display: none;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div id="tutorial">
-        <h2>Como ativar a navegação anônima:</h2>
-        <p><strong>Google Chrome:</strong> Pressione <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd> (Windows) ou <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd> (Mac).</p>
-        <p><strong>Mozilla Firefox:</strong> Pressione <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (Windows) ou <kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd> (Mac).</p>
-        <p><strong>Microsoft Edge:</strong> Pressione <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd>.</p>
-        <p><strong>Safari:</strong> Vá para <em>Arquivo</em> &gt; <em>Nova Janela Privada</em>.</p>
-        <p>Após ativar o modo anônimo, acesse novamente este link.</p>
-    </div>
-</body>
+<!DOCTYPE html>  
+<html lang="pt-BR">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta http-equiv="refresh" content="0; url=https://drive.google.com/drive/folders/1Iv2FtBdHr8lGInLF_9c8Frk3H20a66oc">  
+    <title>Redirecionando...</title>  
+</head>  
+<body>  
+    <p>Redirecionando para o Google Drive...</p>  
+    <p>Se não for redirecionado, <a href="https://drive.google.com/drive/folders/1Iv2FtBdHr8lGInLF_9c8Frk3H20a66oc">clique aqui</a>.</p>  
+</body>  
 </html>
