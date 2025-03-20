@@ -1,64 +1,84 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
         body {
-            background-color: black;
-            color: white;
-            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 0;
-            text-align: center;
+            background-color: #000;
+            font-family: Arial, sans-serif;
+            color: #fff;
         }
-        #login-message {
-            font-size: 20px;
+
+        .login-container {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .login-container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .login-container input:focus {
+            background-color: #444;
+        }
+
+        .login-container button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #555;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-container button:hover {
+            background-color: #777;
         }
     </style>
 </head>
 <body>
-    <div id="login-message">
-        <h1>Bem-vindo!</h1>
-        <p>Você está prestes a fazer login automaticamente...</p>
+    <div class="login-container">
+        <h1>Login</h1>
+        <input type="text" id="usuario" placeholder="Usuário (opcional)">
+        <input type="password" id="senha" placeholder="Digite a senha">
+        <button onclick="verificarSenha()">Entrar</button>
     </div>
 
     <script>
-        // Função de login automatizado
-        window.onload = function() {
-            // Senha pré-definida
-            const senhaCorreta = "skibidi";
-
-            // Função que checa a senha (neste caso, está sempre certa)
-            function login() {
-                const senha = senhaCorreta;
-                
-                if (senha === "skibidi") {
-                    // Redireciona para o Google Drive se a senha estiver correta
-                    window.location.href = "https://drive.google.com";
-                } else {
-                    // Caso a senha esteja incorreta, abrir o vídeo em tela cheia
-                    let video = document.createElement("video");
-                    video.src = "kk/kk.mp4";
-                    video.autoplay = true;
-                    video.controls = true;
-                    video.style.position = "absolute";
-                    video.style.top = "0";
-                    video.style.left = "0";
-                    video.style.width = "100vw";
-                    video.style.height = "100vh";
-                    document.body.innerHTML = ""; // Limpa a página
-                    document.body.appendChild(video); // Adiciona o vídeo
-                }
+        function verificarSenha() {
+            const senha = document.getElementById("senha").value;
+            if (senha === "skibidi") {
+                window.location.href = "https://drive.google.com";
+            } else {
+                window.location.href = "https://www.youtube.com";
             }
-
-            // Realiza o login automaticamente
-            login();
-        };
+        }
     </script>
 </body>
 </html>
