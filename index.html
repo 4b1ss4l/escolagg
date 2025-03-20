@@ -3,84 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Login</title>
+    <title>Login</title>
     <style>
         body {
-            background-color: #000;
+            background-color: black;
             color: white;
             font-family: Arial, sans-serif;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             margin: 0;
-        }
-
-        .login-container {
             text-align: center;
-            padding: 20px;
-            border: 1px solid #fff;
-            border-radius: 10px;
-            background-color: rgba(0, 0, 0, 0.7);
         }
-
-        input[type="password"] {
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            background-color: #333;
-            color: white;
-        }
-
-        button {
-            padding: 10px 20px;
-            margin-top: 15px;
-            border: none;
-            border-radius: 5px;
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
+        #login-message {
+            font-size: 20px;
         }
     </style>
 </head>
 <body>
-
-    <div class="login-container">
-        <h2>Login</h2>
-        <input type="password" id="password" placeholder="Digite sua senha">
-        <button onclick="checkPassword()">Entrar</button>
+    <div id="login-message">
+        <h1>Bem-vindo!</h1>
+        <p>Você está prestes a fazer login automaticamente...</p>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
     <script>
-        // Função para verificar a senha
-        function checkPassword() {
-            // Senha criptografada (usando AES)
-            const encryptedPassword = "4a7f9a9a6e76d327e6333d7e4d5b047f";  //  criptografada com AES
-            
-            // Chave secreta para descriptografar
-            const secretKey = "chaveSecretaDeExemplo";
+        // Função de login automatizado
+        window.onload = function() {
+            // Senha pré-definida
+            const senhaCorreta = "skibidi";
 
-            // Pegando a senha digitada
-            const enteredPassword = document.getElementById('password').value;
-
-            // Criptografando a senha digitada com AES
-            const encryptedEnteredPassword = CryptoJS.AES.encrypt(enteredPassword, secretKey).toString();
-
-            // Comparando a senha criptografada
-            if (encryptedEnteredPassword === encryptedPassword) {
-                window.location.href = 'https://drive.google.com';  // Redireciona para o Google Drive
-            } else {
-                window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';  // Redireciona para o "gemido do zap" (vídeo do Rickroll)
+            // Função que checa a senha (neste caso, está sempre certa)
+            function login() {
+                const senha = senhaCorreta;
+                
+                if (senha === "skibidi") {
+                    // Redireciona para o Google Drive se a senha estiver correta
+                    window.location.href = "https://drive.google.com";
+                } else {
+                    // Caso a senha esteja incorreta, abrir o vídeo em tela cheia
+                    let video = document.createElement("video");
+                    video.src = "kk/kk.mp4";
+                    video.autoplay = true;
+                    video.controls = true;
+                    video.style.position = "absolute";
+                    video.style.top = "0";
+                    video.style.left = "0";
+                    video.style.width = "100vw";
+                    video.style.height = "100vh";
+                    document.body.innerHTML = ""; // Limpa a página
+                    document.body.appendChild(video); // Adiciona o vídeo
+                }
             }
-        }
-    </script>
 
+            // Realiza o login automaticamente
+            login();
+        };
+    </script>
 </body>
 </html>
