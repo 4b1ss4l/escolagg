@@ -3,74 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Login</title>
-    <script src="https://cdn.jsdelivr.net/npm/crypto-js@3.1.9-1/crypto-js.js"></script>
+    <title>Painel de Login</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: black;
+            background-color: #000;
             color: white;
+            font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
+
         .login-container {
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.8);
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
             text-align: center;
+            padding: 20px;
+            border: 1px solid #fff;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
         }
-        .login-container h2 {
-            margin-bottom: 20px;
-        }
-        .login-container input {
+
+        input[type="password"] {
             padding: 10px;
-            margin-bottom: 10px;
-            width: 100%;
+            margin-top: 10px;
+            border-radius: 5px;
             border: 1px solid #ccc;
-            border-radius: 4px;
+            background-color: #333;
+            color: white;
         }
-        .login-container button {
-            padding: 10px;
-            width: 100%;
+
+        button {
+            padding: 10px 20px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 5px;
             background-color: #4CAF50;
             color: white;
-            border: none;
-            border-radius: 4px;
+            font-size: 16px;
             cursor: pointer;
         }
-        .login-container button:hover {
+
+        button:hover {
             background-color: #45a049;
         }
     </style>
 </head>
 <body>
 
-<div class="login-container">
-    <h2>Login</h2>
-    <input type="password" id="password" placeholder="Digite a senha">
-    <button onclick="verifyPassword()">Entrar</button>
-</div>
+    <div class="login-container">
+        <h2>Login</h2>
+        <input type="password" id="password" placeholder="Digite sua senha">
+        <button onclick="checkPassword()">Entrar</button>
+    </div>
 
-<script>
-    // Senha criptografada em base64 (senha  codificada em base64)
-    const encryptedPassword = "c2tpYmlkaQ==";  // "" em base64
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
+    <script>
+        // Função para verificar a senha
+        function checkPassword() {
+            // Senha criptografada (usando AES)
+            const encryptedPassword = "4a7f9a9a6e76d327e6333d7e4d5b047f";  //  criptografada com AES
+            
+            // Chave secreta para descriptografar
+            const secretKey = "chaveSecretaDeExemplo";
 
-    function verifyPassword() {
-        const passwordInput = document.getElementById('password').value;
-        const encryptedInput = CryptoJS.SHA256(passwordInput).toString(CryptoJS.enc.Base64);
+            // Pegando a senha digitada
+            const enteredPassword = document.getElementById('password').value;
 
-        // Verificando se o hash da senha inserida é igual ao da senha criptografada
-        if (encryptedInput === encryptedPassword) {
-            window.location.href = "https://drive.google.com";
-        } else {
-            window.location.href = "https://youtu.be/S5yKfGQBvKU?si=ysnKde7CA-VoFHyT"; // Vídeo do gemidão
+            // Criptografando a senha digitada com AES
+            const encryptedEnteredPassword = CryptoJS.AES.encrypt(enteredPassword, secretKey).toString();
+
+            // Comparando a senha criptografada
+            if (encryptedEnteredPassword === encryptedPassword) {
+                window.location.href = 'https://drive.google.com';  // Redireciona para o Google Drive
+            } else {
+                window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';  // Redireciona para o "gemido do zap" (vídeo do Rickroll)
+            }
         }
-    }
-</script>
+    </script>
 
 </body>
 </html>
