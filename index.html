@@ -1,83 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>...</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #000;
-            font-family: Arial, sans-serif;
-            color: #fff;
-        }
-
-        .login-container {
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-        }
-
-        .login-container h1 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        .login-container input[type="password"] {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #333;
-            color: #fff;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .login-container input[type="password"]:focus {
-            background-color: #444;
-        }
-
-        .login-container button {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            background-color: #555;
-            color: #fff;
-            font-size: 18px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .login-container button:hover {
-            background-color: #777;
-        }
-    </style>
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="login-container">
-        <h1>...</h1>
-        <input type="password" id="teste" placeholder="Aqueles que sabem...">
-        <button onclick="verificarTeste()">Entrar</button>
+        <form id="loginForm">
+            <input type="password" id="password" placeholder="Enter Password" required>
+        </form>
     </div>
-
-    <script>
-        function verificarTeste() {
-            const teste = document.getElementById("teste").value;
-            if (teste === "skibidi") {
-                window.location.href = "https://drive.google.com/drive/folders/1Iv2FtBdHr8lGInLF_9c8Frk3H20a66oc";
-            } else {
-                window.location.href = "https://escgg.vercel.app";
-            }
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
