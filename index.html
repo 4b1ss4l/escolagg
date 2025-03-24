@@ -1,18 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Painel de Login</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            text-align: center;
+        }
+        .login-container input[type="password"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid white;
+            background-color: black;
+            color: white;
+            outline: none;
+        }
+        .login-container button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #ddd;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">
-        <form id="loginForm">
-            <input type="password" id="password" placeholder="Enter Password" required>
-            <button type="submit">Enter</button>
-        </form>
+        <input type="password" id="password" placeholder="Digite a senha">
+        <button id="enterButton">Enter</button>
+        <div id="errorMessage" class="error-message"></div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        const passwordInput = document.getElementById('password');
+        const enterButton = document.getElementById('enterButton');
+        const errorMessage = document.getElementById('errorMessage');
+
+        function checkPassword() {
+            const password = passwordInput.value;
+            if (password === "skibidi") {
+                window.location.href = "https://drive.google.com";
+            } else {
+                errorMessage.textContent = "Senha incorreta!";
+            }
+        }
+
+        enterButton.addEventListener('click', checkPassword);
+
+        passwordInput.addEventListener('keypress', function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
+    </script>
 </body>
 </html>
