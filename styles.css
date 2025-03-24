@@ -36,6 +36,7 @@ input[type="password"]::placeholder {
 }
 
 button {
+    width: 200px; /* Igualar a largura do botão com a caixa de senha */
     cursor: pointer;
     transition: background-color 0.3s;
 }
