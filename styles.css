@@ -1,17 +1,22 @@
 body {
-    background-color: black;
+    background-color: #121212; /* Black background */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     color: white;
+    font-family: Arial, sans-serif;
 }
 
 .login-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    background-color: #1e1e1e; /* Dark background for the container */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 input[type="password"] {
@@ -22,8 +27,26 @@ input[type="password"] {
     border: none;
     outline: none;
     border-radius: 5px;
+    margin-bottom: 10px;
+    width: 200px;
+    text-align: center;
 }
 
 input[type="password"]::placeholder {
     color: #888;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #6200ea; /* Purple button */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #3700b3; /* Darker purple on hover */
 }
